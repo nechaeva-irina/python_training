@@ -4,7 +4,7 @@ from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest
-from contact import *
+from contact import Contact
 
 
 class TestAddContact(unittest.TestCase):
@@ -28,13 +28,19 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_link_text("home page").click()
 
     def create_contact(self, wd):
-        self.fill_personal_info(wd, PersonalInfo(firstname="Ivan", middlename="Ivanovich", lastname="Ivanov", nickname="IVO"))
-        self.fill_company_info(wd, CompanyInfo(title="Testing", company_name="TestCompany", company_address="Moscow, Sovetskaya str.138"))
-        self.fill_phones(wd, Phones(homephone="777-62-48", mobilephone="947-242-952", workphone="826-42-67", fax="927-42-64"))
-        self.fill_emails(wd, Emails(email1="test@test.com", email2="test2@test.com", email3="test3@test.com"))
-        self.fill_homepage(wd, Homepage(homepage="www.training.com"))
-        self.fill_important_dates(wd, ImportantDates(bday="12", bmonth="June", byear="1983", aday="16", amonth="September"))
-        self.fill_other_info(wd, OtherInfo(address2="Sovetskaya,138", homephone="535-25-63"))
+        contact = Contact(firstname="Ivan", middlename="Ivanovich", lastname="Ivanov", nickname="IVO", title="Testing",
+                          company_name="TestCompany", company_address="Moscow, Sovetskaya str.138",
+                          homephone="777-62-48", mobilephone="947-242-952", workphone="826-42-67", fax="927-42-64",
+                          email1="test@test.com", email2="test2@test.com", email3="test3@test.com",
+                          homepage="www.training.com", bday="12", bmonth="June", byear="1983",
+                          aday="16", amonth="September", address2="Sovetskaya,138", homephone2="535-25-63")
+        self.fill_personal_info(wd, contact)
+        self.fill_company_info(wd, contact)
+        self.fill_phones(wd, contact)
+        self.fill_emails(wd, contact)
+        self.fill_homepage(wd, contact)
+        self.fill_important_dates(wd, contact)
+        self.fill_other_info(wd, contact)
         # submit contact creation
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
 
@@ -44,7 +50,7 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("address2").send_keys(contact.address2)
         wd.find_element_by_name("phone2").click()
         wd.find_element_by_name("phone2").clear()
-        wd.find_element_by_name("phone2").send_keys(contact.homephone)
+        wd.find_element_by_name("phone2").send_keys(contact.homephone2)
 
     def fill_important_dates(self, wd, contact):
         wd.find_element_by_name("bday").click()
@@ -129,17 +135,22 @@ class TestAddContact(unittest.TestCase):
         wd.get("http://192.168.0.114/addressbook/index.php")
 
     def is_element_present(self, how, what):
-        try: self.wd.find_element(by=how, value=what)
-        except NoSuchElementException as e: return False
+        try:
+            self.wd.find_element(by=how, value=what)
+        except NoSuchElementException as e:
+            return False
         return True
-    
+
     def is_alert_present(self):
-        try: self.wd.switch_to_alert()
-        except NoAlertPresentException as e: return False
+        try:
+            self.wd.switch_to_alert()
+        except NoAlertPresentException as e:
+            return False
         return True
 
     def tearDown(self):
         self.wd.quit()
+
 
 if __name__ == "__main__":
     unittest.main()
