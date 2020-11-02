@@ -3,17 +3,17 @@ from fixture.session import SessionHelper
 from fixture.contact import ContactHelper
 
 
-class Application2:
+#class Application2:
 
-    def __init__(self):
-        self.wd = webdriver.Chrome()
-        self.wd.implicitly_wait(30)
-        self.session = SessionHelper(self)
-        self.contact = ContactHelper(self)
+  #  def __init__(self):
+      #  self.wd = webdriver.Chrome()
+      #  self.wd.implicitly_wait(30)
+      #  self.session = SessionHelper(self)
+      #  self.contact = ContactHelper(self)
 
-    def open_home_page(self):
-        wd = self.wd
-        wd.get("http://192.168.0.114/addressbook/index.php")
+    #def open_home_page(self):
+       # wd = self.wd
+       # wd.get("http://192.168.0.114/addressbook/index.php")
 
-    def destroy2(self):
-        self.wd.quit()
+   # def destroy2(self):
+       # self.wd.quit()

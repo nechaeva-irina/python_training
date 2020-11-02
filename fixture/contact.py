@@ -3,8 +3,8 @@ from selenium.webdriver.support.ui import Select
 
 class ContactHelper:
 
-    def __init__(self, app2):
-        self.app2 = app2
+    def __init__(self, app):
+        self.app = app
 
     def create(self):
         contact = Contact(firstname="Ivan", middlename="Ivanovich", lastname="Ivanov", nickname="IVO", title="Testing",
@@ -13,7 +13,7 @@ class ContactHelper:
                           email1="test@test.com", email2="test2@test.com", email3="test3@test.com",
                           homepage="www.training.com", bday="12", bmonth="June", byear="1983",
                           aday="16", amonth="September", address2="Sovetskaya,138", homephone2="535-25-63")
-        wd = self.app2.wd
+        wd = self.app.wd
         self.open_new_contact_form()
         self.fill_personal_info(contact)
         self.fill_company_info(contact)
@@ -27,11 +27,11 @@ class ContactHelper:
         self.return_to_home_page()
 
     def open_new_contact_form(self):
-        wd = self.app2.wd
+        wd = self.app.wd
         wd.find_element_by_link_text("add new").click()
 
     def fill_personal_info(self, contact):
-        wd = self.app2.wd
+        wd = self.app.wd
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys(contact.firstname)
@@ -46,7 +46,7 @@ class ContactHelper:
         wd.find_element_by_name("nickname").send_keys(contact.nickname)
 
     def fill_company_info(self, contact):
-        wd = self.app2.wd
+        wd = self.app.wd
         wd.find_element_by_name("title").click()
         wd.find_element_by_name("title").clear()
         wd.find_element_by_name("title").send_keys(contact.title)
@@ -58,7 +58,7 @@ class ContactHelper:
         wd.find_element_by_name("address").send_keys(contact.company_address)
 
     def fill_phones(self, contact):
-        wd = self.app2.wd
+        wd = self.app.wd
         wd.find_element_by_name("home").click()
         wd.find_element_by_name("home").clear()
         wd.find_element_by_name("home").send_keys(contact.homephone)
@@ -73,7 +73,7 @@ class ContactHelper:
         wd.find_element_by_name("fax").send_keys(contact.fax)
 
     def fill_emails(self, contact):
-        wd = self.app2.wd
+        wd = self.app.wd
         wd.find_element_by_name("email").click()
         wd.find_element_by_name("email").clear()
         wd.find_element_by_name("email").send_keys(contact.email1)
@@ -85,13 +85,13 @@ class ContactHelper:
         wd.find_element_by_name("email3").send_keys(contact.email3)
 
     def fill_homepage(self, contact):
-        wd = self.app2.wd
+        wd = self.app.wd
         wd.find_element_by_name("homepage").click()
         wd.find_element_by_name("homepage").clear()
         wd.find_element_by_name("homepage").send_keys(contact.homepage)
 
     def fill_important_dates(self, contact):
-        wd = self.app2.wd
+        wd = self.app.wd
         wd.find_element_by_name("bday").click()
         Select(wd.find_element_by_name("bday")).select_by_visible_text(contact.bday)
         wd.find_element_by_name("bmonth").click()
@@ -105,7 +105,7 @@ class ContactHelper:
         Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact.amonth)
 
     def fill_other_info(self, contact):
-        wd = self.app2.wd
+        wd = self.app.wd
         wd.find_element_by_name("address2").click()
         wd.find_element_by_name("address2").clear()
         wd.find_element_by_name("address2").send_keys(contact.address2)
@@ -113,6 +113,14 @@ class ContactHelper:
         wd.find_element_by_name("phone2").clear()
         wd.find_element_by_name("phone2").send_keys(contact.homephone2)
 
+    def delete_first_contact(self):
+        wd = self.app.wd
+        # select first contact
+        wd.find_element_by_name("selected[]").click()
+        # init deletion
+        wd.find_element_by_xpath("/html/body/div[1]/div[4]/form[2]/div[2]/input").click()
+        wd.switch_to_alert().accept()
+
     def return_to_home_page(self):
-        wd = self.app2.wd
+        wd = self.app.wd
         wd.find_element_by_link_text("home page").click()
