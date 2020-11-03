@@ -122,6 +122,30 @@ class ContactHelper:
         wd.find_element_by_xpath("/html/body/div[1]/div[4]/form[2]/div[2]/input").click()
         wd.switch_to_alert().accept()
 
+    def edit_first_contact(self):
+        contact = Contact(firstname="Petr", middlename="Petrovich", lastname="Petrov", nickname="Peter", title="CEO",
+                          company_name="SunnyComp", company_address="Warsaw, Novaya str.54-87",
+                          homephone="938-524-632", mobilephone="952-7777-33", workphone="6244-786-3222", fax="93-52-67",
+                          email1="new@test.com", email2="new2@test.com", email3="new3@test.com",
+                          homepage="www.sunny.com", bday="3", bmonth="December", byear="1996",
+                          aday="28", amonth="March", address2="Staraya,6", homephone2="111-55-3333")
+        wd = self.app.wd
+        # select first contact
+        wd.find_element_by_name("selected[]").click()
+        # init edition
+        wd.find_element_by_xpath("/html/body/div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img").click()
+        # update contact info
+        self.fill_personal_info(contact)
+        self.fill_company_info(contact)
+        self.fill_phones(contact)
+        self.fill_emails(contact)
+        self.fill_homepage(contact)
+        self.fill_important_dates(contact)
+        self.fill_other_info(contact)
+        # submit update
+        wd.find_element_by_name("update").click()
+        self.return_to_home_page()
+
     def return_to_home_page(self):
         wd = self.app.wd
         wd.find_element_by_link_text("home page").click()
