@@ -7,13 +7,7 @@ class ContactHelper:
     def __init__(self, app):
         self.app = app
 
-    def create(self):
-        contact = Contact(firstname="Ivan", middlename="Ivanovich", lastname="Ivanov", nickname="IVO", title="Testing",
-                          company_name="TestCompany", company_address="Moscow, Sovetskaya str.138",
-                          homephone="777-62-48", mobilephone="947-242-952", workphone="826-42-67", fax="927-42-64",
-                          email1="test@test.com", email2="test2@test.com", email3="test3@test.com",
-                          homepage="www.training.com", bday="12", bmonth="June", byear="1983",
-                          aday="16", amonth="September", address2="Sovetskaya,138", homephone2="535-25-63")
+    def create(self, contact):
         wd = self.app.wd
         self.open_new_contact_form()
         self.fill_personal_info(contact)
@@ -122,13 +116,7 @@ class ContactHelper:
         wd.find_element_by_xpath("/html/body/div[1]/div[4]/form[2]/div[2]/input").click()
         wd.switch_to_alert().accept()
 
-    def edit_first_contact(self):
-        contact = Contact(firstname="Petr", middlename="Petrovich", lastname="Petrov", nickname="Peter", title="CEO",
-                          company_name="SunnyComp", company_address="Warsaw, Novaya str.54-87",
-                          homephone="938-524-632", mobilephone="952-7777-33", workphone="6244-786-3222", fax="93-52-67",
-                          email1="new@test.com", email2="new2@test.com", email3="new3@test.com",
-                          homepage="www.sunny.com", bday="3", bmonth="December", byear="1996",
-                          aday="28", amonth="March", address2="Staraya,6", homephone2="111-55-3333")
+    def edit_first_contact(self, contact):
         wd = self.app.wd
         # select first contact
         wd.find_element_by_name("selected[]").click()
