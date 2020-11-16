@@ -27,7 +27,6 @@ class GroupHelper:
         self.change_field_value("group_header", group.header)
         self.change_field_value("group_footer", group.footer)
 
-
     def change_field_value(self, field_name, text):
         wd = self.app.wd
         if text is not None:
@@ -76,4 +75,4 @@ class GroupHelper:
             text = element.text
             id = element.find_element_by_name("selected[]").get_attribute("value")
             groups.append(Group(name=text, id=id))
-        return  groups
+        return groups
