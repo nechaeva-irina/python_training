@@ -110,8 +110,8 @@ class ContactHelper:
         wd = self.app.wd
         self.select_contact_by_index(index)
         # init edition
-        ind2 = index+2
-        wd.find_element_by_xpath(f"/html/body/div/div[4]/form[2]/table/tbody/tr[{ind2}]/td[8]/a/img").click()
+        rows = wd.find_elements_by_name("entry")
+        rows[index].find_element_by_xpath("./td[8]/a/img").click()
         # update contact info
         self.fill_personal_info(new_contact_data)
         self.fill_company_info(new_contact_data)
