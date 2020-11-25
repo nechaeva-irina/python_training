@@ -13,12 +13,13 @@ def random_string(prefix, maxlen):
 testdata = [
     Contact(firstname=random_string("firstname", 15), middlename=random_string("middletname", 15),
             lastname=random_string("lastname", 20), nickname=random_string("nicktname", 10),
-            title="Testing", company_name="TestCompany",
-            company_address="Moscow, Sovetskaya str.138",
-            homephone="777-62-48", mobilephone="947-242-952", workphone="826-42-67", fax="927-42-64",
-            email1="test@test.com", email2="test2@test.com", email3="test3@test.com",
-            homepage="www.training.com", bday="12", bmonth="June", byear="1983",
-            aday="16", amonth="September", address2="Sovetskaya,138", homephone2="535-25-63")
+            title=random_string("title", 15), company_name=random_string("company_name", 15),
+            company_address=random_string("company_address", 20),
+            homephone=random_string("H", 9), mobilephone=random_string("M", 9), workphone=random_string("W", 9),
+            fax=random_string("F", 9), email1=random_string("E1", 10), email2=random_string("E2", 10),
+            email3=random_string("E3", 10), homepage=random_string("HP", 10), bday="12", bmonth="June",
+            byear=random_string("",4), aday="16", amonth="September", address2=random_string("address2", 15),
+            homephone2=random_string("H", 9))
     for i in range(5)
 ]
 
