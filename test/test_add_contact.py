@@ -6,7 +6,7 @@ import string
 
 
 def random_string(prefix, maxlen):
-    symbols = string.ascii_letters + string.digits + " " * 10
+    symbols = string.ascii_letters + string.digits + " "
     return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
 
@@ -18,7 +18,7 @@ testdata = [
             homephone=random_string("H", 9), mobilephone=random_string("M", 9), workphone=random_string("W", 9),
             fax=random_string("F", 9), email1=random_string("E1", 10), email2=random_string("E2", 10),
             email3=random_string("E3", 10), homepage=random_string("HP", 10), bday="12", bmonth="June",
-            byear=random_string("",4), aday="16", amonth="September", address2=random_string("address2", 15),
+            byear=random_string("", 4), aday="16", amonth="September", address2=random_string("address2", 15),
             homephone2=random_string("H", 9))
     for i in range(5)
 ]

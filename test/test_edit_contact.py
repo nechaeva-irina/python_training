@@ -22,9 +22,8 @@ def test_edit_some_contact(app):
                       homepage="www.sunny.com", bday="3", bmonth="December", byear="1996",
                       aday="28", amonth="March", address2="Staraya,6", homephone2="111-55-3333")
     contact.id = old_contacts[index].id
-    app.contact.edit_contact_by_index(index,contact)
+    app.contact.edit_contact_by_index(index, contact)
     assert len(old_contacts) == app.contact.count()
     new_contacts = app.contact.get_contact_list()
     old_contacts[index] = contact
     assert sorted(old_contacts, key=Contact.id_or_max) == sorted(new_contacts, key=Contact.id_or_max)
-

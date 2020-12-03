@@ -1,0 +1,5 @@
+{
+  "baseUrl": "http://192.168.0.114/addressbook/index.php",
+  "username": "admin",
+  "password": "secret"
+}
