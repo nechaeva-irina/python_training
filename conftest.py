@@ -47,5 +47,3 @@ def pytest_generate_tests(metafunc):
 
 def load_from_module(module):
     return importlib.import_module("data.%s" % module).testdata
-
-
