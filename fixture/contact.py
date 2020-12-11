@@ -179,14 +179,7 @@ class ContactHelper:
                 id = element.find_element_by_name("selected[]").get_attribute("value")
                 company_address = cells[3].text
                 all_emails = cells[4].text
-                #email1 = all_emails.split('\n')[0]
-               # email2 = all_emails.split('\n')[1]
-                #email3 = all_emails.split('\n')[2]
                 all_phones = cells[5].text
-                #homephone = all_phones.split('\n')[0]
-               # mobilephone = all_phones.split('\n')[1]
-                #workphone = all_phones.split('\n')[2]
-                #homephone2 = all_phones.split('\n')[3]
                 self.contact_cache.append(
                     Contact(lastname=lastname, firstname=firstname, id=id, company_address=company_address,
                             all_emails_from_home_page=all_emails,
