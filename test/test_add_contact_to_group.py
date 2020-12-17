@@ -27,7 +27,7 @@ def test_add_contact_to_group(app, db, check_ui):
     else:
         contacts_not_in_random_group = db.get_contacts_not_in_group(Group(id=group_to_add.id))
         if len(contacts_not_in_random_group) == 0:
-            contact_to_add1 = app.contact.create(Contact(firstname="Oleg", middlename="Olegovich", lastname="Ivanov", nickname="IVO",
+            app.contact.create(Contact(firstname="Oleg", middlename="Olegovich", lastname="Ivanov", nickname="IVO",
                                    title="Testing", company_name="TestCompany",
                                    company_address="Moscow, Sovetskaya str.138",
                                    homephone="777-62-48", mobilephone="947-242-952", workphone="826-42-67",
@@ -35,6 +35,7 @@ def test_add_contact_to_group(app, db, check_ui):
                                    email1="test@test.com", email2="test2@test.com", email3="test3@test.com",
                                    homepage="www.training.com", bday="12", bmonth="June", byear="1983",
                                    aday="16", amonth="September", address2="Sovetskaya,138", homephone2="535-25-63"))
+            contact_to_add1 = db.get_contacts_not_in_group(Group(id=group_to_add.id))[0]
             app.contact.add_contact_to_group(contact_to_add1.id, group_to_add.id)
             list_of_contacts.append(contact_to_add1)
         else:
