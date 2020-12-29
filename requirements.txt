@@ -5,3 +5,5 @@ jsonpickle
 pony
 pymysql
 mysql-connector-python-rf
+lxml-4.6.2
+allure-pytest
