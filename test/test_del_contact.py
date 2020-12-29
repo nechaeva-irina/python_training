@@ -22,3 +22,4 @@ def test_delete_some_contact(app, db, check_ui):
     if check_ui:
         assert sorted(new_contacts, key=Contact.id_or_max) == sorted(app.contact.get_contact_list(),
                                                                      key=Contact.id_or_max)
+

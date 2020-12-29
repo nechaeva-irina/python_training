@@ -103,6 +103,7 @@ class ContactHelper:
         wd.switch_to_alert().accept()
         self.contact_cache = None
 
+
     def select_first_contact(self):
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
