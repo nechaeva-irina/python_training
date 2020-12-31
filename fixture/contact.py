@@ -97,6 +97,7 @@ class ContactHelper:
 
     def delete_contact_by_id(self, id):
         wd = self.app.wd
+        self.return_to_home_page()
         self.select_contact_by_id(id)
         # init deletion
         wd.find_element_by_xpath("/html/body/div[1]/div[4]/form[2]/div[2]/input").click()
@@ -141,6 +142,7 @@ class ContactHelper:
 
     def edit_contact_by_id(self, id, new_contact_data):
         wd = self.app.wd
+        self.return_to_home_page()
         self.select_contact_by_id(id)
         # init edition
         wd.find_element_by_xpath("//*[@href='edit.php?id=%s']" % id).click()
@@ -160,6 +162,7 @@ class ContactHelper:
     def return_to_home_page(self):
         wd = self.app.wd
         wd.find_element_by_xpath("/html/body/div/div[3]/ul/li[1]/a").click()
+
 
     def count(self):
         wd = self.app.wd
@@ -231,6 +234,7 @@ class ContactHelper:
 
     def add_contact_to_group(self, contact_id, group_id):
         wd = self.app.wd
+        self.return_to_home_page()
         self.select_contact_by_id(contact_id)
         # select group for selected contact
         Select(wd.find_element_by_xpath("/html/body/div/div[4]/form[2]/div[4]/select")).select_by_value(group_id)
@@ -241,8 +245,9 @@ class ContactHelper:
 
     def delete_contact_from_group(self, contact_id, group_id):
         wd = self.app.wd
+        self.return_to_home_page()
         Select(wd.find_element_by_xpath('//*[@id="right"]/select')).select_by_value(group_id)
         self.select_contact_by_id(contact_id)
-        wd.find_element_by_name("remove").click()
+        wd.find_element_by_css_selector('input[name="remove"]').click()
         self.return_to_home_page()
         self.contact_cache = None

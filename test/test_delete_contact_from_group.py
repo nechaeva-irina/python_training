@@ -4,7 +4,7 @@ from model.contact import Contact
 from fixture.orm import ORMFixture
 
 
-def test_delete_contact_from_group(app, db, check_ui):
+def test_delete_contact_from_group(app, db, check_ui, orm):
     if len(db.get_contact_list()) == 0:
         app.contact.create(Contact(firstname="Oleg", middlename="Olegovich", lastname="Ivanov", nickname="IVO",
                                    title="Testing", company_name="TestCompany",
@@ -20,8 +20,7 @@ def test_delete_contact_from_group(app, db, check_ui):
     contact_to_delete = random.choice(old_contacts)
     list_of_groups = db.get_group_list()
     group_for_deletion = random.choice(list_of_groups)
-    db = ORMFixture(host="127.0.0.1", name="addressbook", user="root", password="")
-    l = db.get_contacts_in_group(Group(id=group_for_deletion.id))
+    l = orm.get_contacts_in_group(Group(id=group_for_deletion.id))
     if contact_to_delete not in l:
         app.contact.add_contact_to_group(contact_to_delete.id, group_for_deletion.id)
     app.contact.delete_contact_from_group(contact_to_delete.id, group_for_deletion.id)
